@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Server.Visca.Commands;
+using System.IO.Ports;
 
 namespace Server
 {
@@ -10,13 +11,8 @@ namespace Server
     {
         static void Main()
         {
-            CAM_Title_Set cmd = new CAM_Title_Set();
-            cmd.Color = CAM_Title_Set.Colors.Blue;
-            cmd.Blink = false;
-            cmd.Title = "teswting hello!";
-            cmd.VPosition = 200;
-
-            var results = cmd.GetCommandMessages();
+            SerialPort s;
+            
         }
 
     }

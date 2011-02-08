@@ -5,8 +5,10 @@ using System.Text;
 
 namespace Server.Visca.Packets
 {
-    abstract class Packet
+    abstract class Packet : IFreezable
     {
+
+
         public abstract byte[] GetDataBytes();
 
     }

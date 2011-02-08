@@ -59,6 +59,7 @@
     <Compile Include="Visca\Packets\Packet.cs" />
     <Compile Include="Visca\Packets\StringPacket.cs" />
     <Compile Include="Visca\Packets\TerminatorPacket.cs" />
+    <Compile Include="Visca\VISCASerialPort.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
