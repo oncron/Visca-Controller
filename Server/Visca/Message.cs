@@ -8,9 +8,16 @@ namespace Server.Visca
 {
     class Message
     {
-        List<Packet> _packets = new List<Packet>();
+        public Message( Packet[] packets )
+        {
+            List<byte> data = new List<byte>();
 
-        public List<Packet> Packets { get { return _packets; } }
+            foreach( Packet packet in packets ) data.AddRange( packet.GetDataBytes() );
+
+            Data = data.ToArray();
+        }
+
+        public byte[] Data { get; private set; }
 
 
     }

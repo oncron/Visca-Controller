@@ -16,9 +16,9 @@ namespace Server.Visca.Commands
 
         public bool Display { get; set; }
 
-        protected override Packet[] GetDataPackets()
+        protected override void OnGenerateCommandMessage( ICommandMessageGenerator gen )
         {
-            return new Packet[] { new CustomPacket( 0x01, 0x04, 0x74, (byte)(Display ? 0x02 : 0x03) ) };
+            gen.CreateMessage( new LiteralBytesPacket( 0x01, 0x04, 0x74, (byte)( Display ? 0x02 : 0x03 ) ) );
         }
     }
 }

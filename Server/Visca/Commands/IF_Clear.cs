@@ -14,15 +14,11 @@ namespace Server.Visca.Commands
     /// </summary>
     class IF_Clear : CommandBase 
     {
-        public IF_Clear()
-            : base( true )
-        {
+        public IF_Clear() : base( true ) { }
 
-        }
-
-        protected override Packet[] GetDataPackets()
+        protected override void OnGenerateCommandMessage( ICommandMessageGenerator gen )
         {
-            return new Packet[] { new CustomPacket( 0x01, 0x00, 0x01 ) };   
+            gen.CreateMessage( new LiteralBytesPacket( 0x01, 0x00, 0x01 ) );
         }
     }
 }

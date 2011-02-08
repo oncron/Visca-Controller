@@ -25,11 +25,9 @@ namespace Server.Visca.Commands
 
         public Commands Command { get; set; }
 
-        protected override Packet[] GetDataPackets()
+        protected override void OnGenerateCommandMessage( ICommandMessageGenerator gen )
         {
-            return new Packet[] { 
-                new CustomPacket( 0x01, 0x04, 0x00, (byte)Command),
-            };
+            gen.CreateMessage( new LiteralBytesPacket( 0x01, 0x04, 0x00, (byte)Command ) );
         }
     }
 }

@@ -11,16 +11,12 @@ namespace Server
         static void Main()
         {
             CAM_Title_Set cmd = new CAM_Title_Set();
-
-            cmd.Title = "President Carlson";
             cmd.Color = 5;
-            cmd.Blink = 4;
-            cmd.HPosition = 50;
-            cmd.VPosition = 75;
+            cmd.Blink = 3;
+            cmd.Title = "teswting hello!";
+            cmd.VPosition = 200;
 
-            
-
-            var results = cmd.GetDataBytes();
+            var results = cmd.GetCommandMessages();
         }
 
     }

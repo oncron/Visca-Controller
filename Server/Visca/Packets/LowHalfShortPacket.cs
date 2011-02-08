@@ -5,9 +5,12 @@ using System.Text;
 
 namespace Server.Visca.Packets
 {
-    class LowHalfUShortPacket : Packet 
+    class LowHalfShortPacket : Packet 
     {
-        public ushort Value { get; set; }
+        public LowHalfShortPacket( short value ) { Value = value; }
+        public LowHalfShortPacket() { }
+
+        public short Value { get; set; }
 
         public override byte[] GetDataBytes()
         {

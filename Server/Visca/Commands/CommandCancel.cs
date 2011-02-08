@@ -22,9 +22,9 @@ namespace Server.Visca.Commands
             }
         }
 
-        protected override Packet[] GetDataPackets()
+        protected override void OnGenerateCommandMessage( ICommandMessageGenerator gen )
         {
-            return new Packet[] { new HalfBytePacket() { HighHalf = 2, LowHalf = _socket } };
+            gen.CreateMessage( new HalfBytePacket() { HighHalf = 2, LowHalf = _socket } );
         }
     }
 }

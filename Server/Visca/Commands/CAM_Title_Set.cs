@@ -6,14 +6,26 @@ using Server.Visca.Packets;
 
 namespace Server.Visca.Commands
 {
-    class CAM_Title_Set : CommandBase 
+    class CAM_Title_Set : CommandBase
     {
+        public enum Colors : byte
+        {
+            White = 0,
+            Yellow = 1,
+            Violet = 2,
+            Red = 3,
+            Cyan = 4,
+            Green  = 5,
+            Blue = 6
+        }
+
         public CAM_Title_Set() : base( false ) { }
 
         public byte VPosition { get; set; }
         public byte HPosition { get; set; }
-        public byte Color { get; set; }
-        public byte Blink { get; set; }
+        public Colors Color { get; set; }
+
+        public bool Blink { get; set; }
 
         string _title = null;
         public string Title
@@ -27,48 +39,46 @@ namespace Server.Visca.Commands
             }
         }
 
-        protected override Packet[] GetDataPackets()
+        protected override void OnGenerateCommandMessage( ICommandMessageGenerator gen )
         {
             if( String.IsNullOrEmpty( Title ) )
             {
                 //Title Clear
-                return new Packet[] { new CustomPacket( 0x01, 0x04, 0x74, 0x00 ) };
+                gen.CreateMessage( new LiteralBytesPacket( 0x01, 0x04, 0x74, 0x00 ) );
             }
             else
             {
                 string str1 = Title.Length > 10 ? Title.Substring( 0, 10 ) : Title;
                 string str2 = Title.Length > 10 ? Title.Substring( 10 ) : "";
 
-                List<Packet> packets = new List<Packet>();
-
-                CustomPacket startPacket = new CustomPacket( 0x01, 0x04, 0x73 );
+                LiteralBytesPacket startPacket = new LiteralBytesPacket( 0x01, 0x04, 0x73 );
 
                 //Title Set1
-                packets.Add( startPacket );
-                packets.Add( new CustomPacket( 0x00, VPosition, HPosition, Color, Blink ) );
-                packets.Add( new FillerPacket( 6, 0x00 ) );
-                packets.Add( new TerminatorPacket() );
+                gen.CreateMessage(
+                    startPacket,
+                    new LiteralBytesPacket( 0x00, VPosition, HPosition, (byte)Color, (byte)( Blink ? 1 : 0 ) ),
+                    new FillerPacket( 6, 0x00 )
+                    );
 
                 //Title Set2
-                packets.Add( startPacket );
-                packets.Add( new CustomPacket( 0x01 ) );
-                packets.Add( new StringPacket() { Value = str1 } );
-                packets.Add( new FillerPacket( 10 - str1.Length, 0x00 ) );
-                packets.Add( new TerminatorPacket() );
+                gen.CreateMessage(
+                    startPacket,
+                    new LiteralBytesPacket( 0x01 ),
+                    new StringPacket() { Value = str1 },
+                    new FillerPacket( 10 - str1.Length, 0x00 )
+                    );
 
                 //Title Set3
                 if( str2.Length > 0 )
                 {
-                    packets.Add( startPacket );
-                    packets.Add( new CustomPacket( 0x02 ) );
-                    packets.Add( new StringPacket() { Value = str2 } );
-                    packets.Add( new FillerPacket( 10 - str2.Length, 0x00 ) );
-                    packets.Add( new TerminatorPacket() );
+                    gen.CreateMessage(
+                        startPacket,
+                        new LiteralBytesPacket( 0x02 ),
+                        new StringPacket() { Value = str2 },
+                        new FillerPacket( 10 - str2.Length, 0x00 )
+                        );
                 }
-
-                return packets.ToArray();
             }
-
         }
     }
 }

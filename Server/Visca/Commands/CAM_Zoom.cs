@@ -15,7 +15,7 @@ namespace Server.Visca.Commands
             Wide_Standard = 0x03,
             Tele_Variable = 0x20,
             Wide_Variable = 0x30,
-            Direct  
+            Direct
         }
 
         public CAM_Zoom()
@@ -50,7 +50,7 @@ namespace Server.Visca.Commands
 
                 return _varZoom;
             }
-            set 
+            set
             {
                 if( value < 0 || value > 7 ) throw new ArgumentOutOfRangeException();
 
@@ -58,9 +58,9 @@ namespace Server.Visca.Commands
             }
         }
 
-        protected override Packets.Packet[] GetDataPackets()
+        protected override void OnGenerateCommandMessage( ICommandMessageGenerator gen )
         {
-            Packet startPacket = new CustomPacket( 0x01, 0x04 );
+            Packet startPacket = new LiteralBytesPacket( 0x01, 0x04 );
             HalfBytePacket cmdPacket = new HalfBytePacket() { LowHalf = 0x07 };
             Packet dataPacket;
 
@@ -68,14 +68,18 @@ namespace Server.Visca.Commands
             {
                 cmdPacket.HighHalf = 0x04;
 
-                dataPacket = new LowHalfUShortPacket() { Value = DirectZoomPosition };
+                dataPacket = new LowHalfShortPacket() { Value = (short)DirectZoomPosition };
             }
             else
             {
-                dataPacket = new CustomPacket( (byte)(Command + VariableZoom) );
+                dataPacket = new LiteralBytesPacket( (byte)( Command + VariableZoom ) );
             }
 
-            return new Packet[] { startPacket, cmdPacket, dataPacket };
+            gen.CreateMessage(
+                startPacket,
+                cmdPacket,
+                dataPacket
+                );
         }
     }
 }

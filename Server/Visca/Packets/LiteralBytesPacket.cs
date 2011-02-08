@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Server.Visca.Packets
 {
-    class CustomPacket : Packet
+    class LiteralBytesPacket : Packet
     {
         byte[] _data;
 
-        public CustomPacket( params byte[] data )
+        public LiteralBytesPacket( params byte[] data )
         {
             _data = data;
         }
