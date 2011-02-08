@@ -11,8 +11,8 @@ namespace Server
         static void Main()
         {
             CAM_Title_Set cmd = new CAM_Title_Set();
-            cmd.Color = 5;
-            cmd.Blink = 3;
+            cmd.Color = CAM_Title_Set.Colors.Blue;
+            cmd.Blink = false;
             cmd.Title = "teswting hello!";
             cmd.VPosition = 200;
 
