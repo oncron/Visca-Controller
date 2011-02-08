@@ -1,0 +1,5 @@
+C:\Documents and Settings\Nathan\My Documents\Visual Studio 2010\Projects\VISCA Controller\Server\bin\Debug\Server.exe
+C:\Documents and Settings\Nathan\My Documents\Visual Studio 2010\Projects\VISCA Controller\Server\bin\Debug\Server.pdb
+C:\Documents and Settings\Nathan\My Documents\Visual Studio 2010\Projects\VISCA Controller\Server\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Nathan\My Documents\Visual Studio 2010\Projects\VISCA Controller\Server\obj\x86\Debug\Server.exe
+C:\Documents and Settings\Nathan\My Documents\Visual Studio 2010\Projects\VISCA Controller\Server\obj\x86\Debug\Server.pdb
