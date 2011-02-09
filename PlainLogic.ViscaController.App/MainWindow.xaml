@@ -32,7 +32,7 @@
 
         </TextBox>
         
-        <my:PanTiltControl Grid.Column="1" Grid.Row="1" x:Name="panTiltControl" />
+        <my:PanTiltControl Margin="10" Grid.Column="1" Grid.Row="1" x:Name="panTiltControl" />
     </Grid>
     
     
