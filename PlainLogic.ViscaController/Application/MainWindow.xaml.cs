@@ -31,6 +31,7 @@ namespace PlainLogic.ViscaController.Application
 
         int _lastPanCmd = 0;
         int _lastTiltCmd = 0;
+        int _lastZoom = 0;
 
         private void CommandBinding_Executed( object sender, ExecutedRoutedEventArgs e )
         {
@@ -45,9 +46,13 @@ namespace PlainLogic.ViscaController.Application
             {
                 _lastPanCmd = (int)e.Parameter;
             }
-            else
+            else if( cmd == VISCACommands.Tilt )
             {
                 _lastTiltCmd = (int)e.Parameter;
+            }
+            else if( cmd == VISCACommands.Zoom )
+            {
+                _lastZoom = (int)e.Parameter;
             }
         }
 
@@ -56,6 +61,12 @@ namespace PlainLogic.ViscaController.Application
             Point pt = Point.Add( cameraField.FocalPointLocation, new Vector( _lastPanCmd / 10.0, _lastTiltCmd / 10.0 ) );
 
             cameraField.FocalPointLocation = pt;
+
+
+            cameraField.FocalPointSize = new Size(
+                cameraField.FocalPointSize.Width + ( _lastZoom / 1000.0 ),
+                cameraField.FocalPointSize.Height + ( _lastZoom / 1000.0 ) );
+
         }
     }
 }

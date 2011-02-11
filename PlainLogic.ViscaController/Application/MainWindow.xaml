@@ -9,6 +9,7 @@
     <Window.CommandBindings>
         <CommandBinding Command="app:VISCACommands.Pan" Executed="CommandBinding_Executed" />
         <CommandBinding Command="app:VISCACommands.Tilt" Executed="CommandBinding_Executed" />
+        <CommandBinding Command="app:VISCACommands.Zoom" Executed="CommandBinding_Executed" />
     </Window.CommandBindings>
     
     <!--<Window.InputBindings>
@@ -33,8 +34,19 @@
         </TextBox>
         
         <my:CameraField x:Name="cameraField" BorderBrush="Black" BorderThickness="1" MinFOV="-100,-20" FocalPointLocation="0,0" />
+
+        <Grid Margin="10" Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <my:PanTiltControl x:Name="panTiltControl" BorderBrush="Black" BorderThickness="1" />
+            
+            <my:ZoomControl Grid.Column="1" x:Name="zoomControl" BorderBrush="Black" BorderThickness="1" />
+        </Grid>
         
-        <my:PanTiltControl Margin="10" Grid.Column="1" Grid.Row="1" x:Name="panTiltControl" BorderBrush="Black" BorderThickness="1" />
+        
     </Grid>
     
     

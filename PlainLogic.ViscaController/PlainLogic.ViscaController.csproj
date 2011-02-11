@@ -66,6 +66,9 @@
     <Compile Include="Application\Controls\CameraField.xaml.cs">
       <DependentUpon>CameraField.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Application\Controls\ZoomControl.xaml.cs">
+      <DependentUpon>ZoomControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Server\IViscaService.cs" />
     <Compile Include="Server\ServerEngine.cs" />
@@ -99,6 +102,10 @@
     <Compile Include="Visca\ViscaResponse.cs" />
     <Compile Include="Visca\VISCASerialPort.cs" />
     <Page Include="Application\Controls\PanTiltControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Application\Controls\ZoomControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
