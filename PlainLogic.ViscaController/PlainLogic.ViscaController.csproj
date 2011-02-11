@@ -11,8 +11,7 @@
     <RootNamespace>PlainLogic.ViscaController</RootNamespace>
     <AssemblyName>PlainLogic.ViscaController</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -36,9 +35,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>PlainLogic.ViscaController.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -52,10 +55,14 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App\App.xaml">
+    <ApplicationDefinition Include="Application\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Program.cs" />
+    <Compile Include="Server\IViscaService.cs" />
+    <Compile Include="Server\ServerEngine.cs" />
+    <Compile Include="Server\ViscaService.cs" />
     <Compile Include="Visca\Commands\AddressSet.cs" />
     <Compile Include="Visca\Commands\ClearAll.cs" />
     <Compile Include="Visca\Commands\CommandCancel.cs" />
@@ -84,23 +91,23 @@
     <Compile Include="Visca\ViscaCommand.cs" />
     <Compile Include="Visca\ViscaResponse.cs" />
     <Compile Include="Visca\VISCASerialPort.cs" />
-    <Page Include="App\Controls\PanTiltControl.xaml">
+    <Page Include="Application\Controls\PanTiltControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="App\MainWindow.xaml">
+    <Page Include="Application\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App\App.xaml.cs">
+    <Compile Include="Application\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="App\Controls\PanTiltControl.xaml.cs">
+    <Compile Include="Application\Controls\PanTiltControl.xaml.cs">
       <DependentUpon>PanTiltControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="App\VISCACommands.cs" />
-    <Compile Include="App\MainWindow.xaml.cs">
+    <Compile Include="Application\VISCACommands.cs" />
+    <Compile Include="Application\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

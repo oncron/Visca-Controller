@@ -1,8 +1,8 @@
-﻿<Window x:Class="PlainLogic.ViscaController.App.MainWindow"
+﻿<Window x:Class="PlainLogic.ViscaController.Application.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:PlainLogic.ViscaController.App"
-        Title="VISCA Controller" Height="350" Width="525" xmlns:my="clr-namespace:PlainLogic.ViscaController.App.Controls">
+        xmlns:local="clr-namespace:PlainLogic.ViscaController.Application"
+        Title="VISCA Controller" Height="350" Width="525" xmlns:my="clr-namespace:PlainLogic.ViscaController.Application.Controls">
     
     <Window.CommandBindings>
         <CommandBinding Command="local:VISCACommands.PanLeft" Executed="CommandBinding_Executed" />

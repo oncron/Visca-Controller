@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="PlainLogic.ViscaController.App.Controls.PanTiltControl"
+﻿<UserControl x:Class="PlainLogic.ViscaController.Application.Controls.PanTiltControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PlainLogic.ViscaController.App"
+             xmlns:local="clr-namespace:PlainLogic.ViscaController.Application"
              mc:Ignorable="d" MinWidth="100" MinHeight="100"
              ClipToBounds="True">
     <Grid ShowGridLines="True">

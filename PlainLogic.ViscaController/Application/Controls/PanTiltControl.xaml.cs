@@ -13,7 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
 
-namespace PlainLogic.ViscaController.App.Controls
+namespace PlainLogic.ViscaController.Application.Controls
 {
     /// <summary>
     /// Interaction logic for PanTiltControl.xaml
