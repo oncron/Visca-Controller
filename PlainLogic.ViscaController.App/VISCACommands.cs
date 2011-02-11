@@ -11,15 +11,11 @@ namespace PlainLogic.ViscaController.App
 
         static VISCACommands()
         {
-            TiltUp = new RoutedUICommand( "Tilt Camera Up", "Tilt Up", typeof( VISCACommands ) );
-            TiltDown = new RoutedUICommand( "Tilt Camera Down", "Tilt Down", typeof( VISCACommands ) );
-            PanLeft = new RoutedUICommand( "Pan Camera Left", "Pan Left", typeof( VISCACommands ) );
-            PanRight = new RoutedUICommand( "Pan Camera Right", "Pan Right", typeof( VISCACommands ) );
+            Tilt = new RoutedUICommand( "Tilt Camera", "Tilt", typeof( VISCACommands ) );
+            Pan = new RoutedUICommand( "Pan Camera", "Pan", typeof( VISCACommands ) );
         }
 
-        public static RoutedUICommand TiltUp { get; private set; }
-        public static RoutedUICommand TiltDown { get; private set; }
-        public static RoutedUICommand PanLeft { get; private set; }
-        public static RoutedUICommand PanRight { get; private set; }
+        public static RoutedUICommand Tilt { get; private set; }
+        public static RoutedUICommand Pan { get; private set; }
     }
 }

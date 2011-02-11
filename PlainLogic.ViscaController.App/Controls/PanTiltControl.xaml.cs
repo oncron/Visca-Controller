@@ -34,6 +34,15 @@ namespace PlainLogic.ViscaController.App.Controls
         static void PanTilt_PropertyChangedCallback( DependencyObject obj, DependencyPropertyChangedEventArgs args )
         {
             ( (PanTiltControl)obj )._adorner.InvalidateVisual();
+
+            if( args.Property == PanProperty )
+            {
+                VISCACommands.Pan.Execute( args.NewValue, (IInputElement)obj );
+            }
+            else
+            {
+                VISCACommands.Tilt.Execute( args.NewValue, (IInputElement)obj );
+            }
         }
 
         public int PanRange
@@ -82,13 +91,16 @@ namespace PlainLogic.ViscaController.App.Controls
 
         private void target_MouseDown( object sender, MouseButtonEventArgs e )
         {
-            Mouse.Capture( target );
-            Mouse.OverrideCursor = Cursors.None;
+            if( e.ChangedButton == MouseButton.Left && e.LeftButton == MouseButtonState.Pressed )
+            {
+                Mouse.Capture( target );
+                Mouse.OverrideCursor = Cursors.None;
 
-            var adornerLayer = AdornerLayer.GetAdornerLayer( target );
-            adornerLayer.Add( _adorner );
+                var adornerLayer = AdornerLayer.GetAdornerLayer( target );
+                adornerLayer.Add( _adorner );
 
-            _dragStart = e.GetPosition( this );
+                _dragStart = e.GetPosition( this );
+            }
         }
 
         private void target_MouseMove( object sender, MouseEventArgs e )
@@ -105,8 +117,8 @@ namespace PlainLogic.ViscaController.App.Controls
                 if( diff.Y > maxHeight ) diff.Y = maxHeight;
                 if( diff.Y < -maxHeight ) diff.Y = -maxHeight;
 
-                Pan = (int)Math.Round( ( Math.Abs( diff.X ) * PanRange / maxWidth ) );
-                Tilt = (int)Math.Round( ( Math.Abs( diff.Y ) * TiltRange / maxHeight ) );
+                Pan = (int)Math.Round( ( diff.X * PanRange / maxWidth ) );
+                Tilt = (int)Math.Round( ( diff.Y * TiltRange / maxHeight ) );
 
                 target.RenderTransform = new TranslateTransform( diff.X, diff.Y );
             }
@@ -114,18 +126,21 @@ namespace PlainLogic.ViscaController.App.Controls
 
         private void target_MouseUp( object sender, MouseButtonEventArgs e )
         {
-            Mouse.Capture( null );
-            Mouse.OverrideCursor = null;
+            if( e.ChangedButton == MouseButton.Left && e.LeftButton == MouseButtonState.Released )
+            {
+                Mouse.Capture( null );
+                Mouse.OverrideCursor = null;
 
-            target.RenderTransform = null;
+                target.RenderTransform = null;
 
-            var adornerLayer = AdornerLayer.GetAdornerLayer( target );
-            adornerLayer.Remove( _adorner );
+                var adornerLayer = AdornerLayer.GetAdornerLayer( target );
+                adornerLayer.Remove( _adorner );
 
-            Pan = 0;
-            Tilt = 0;
+                Pan = 0;
+                Tilt = 0;
 
-            _dragStart = null;
+                _dragStart = null;
+            }
         }
 
         class TargetAdorner : Adorner
@@ -143,10 +158,13 @@ namespace PlainLogic.ViscaController.App.Controls
 
             protected override void OnRender( DrawingContext drawingContext )
             {
-                var panText = FormatText( String.Format( "{0} ({1:P0})", _owner.Pan.ToString(), (double)_owner.Pan / (double)_owner.PanRange ) );
+                double pan = Math.Abs( _owner.Pan );
+                double tilt = Math.Abs( _owner.Tilt );
+
+                var panText = FormatText( String.Format( "{0} ({1:P0})", pan, pan / (double)_owner.PanRange ) );
                 drawingContext.DrawText( panText, new Point( -panText.Width - 5, ( _element.ActualHeight / 2.0 ) - ( panText.Height / 2.0 ) ) );
 
-                var tiltText = FormatText( String.Format( "{0} ({1:P0})", _owner.Tilt.ToString(), (double)_owner.Tilt / (double)_owner.TiltRange ) );
+                var tiltText = FormatText( String.Format( "{0} ({1:P0})", tilt, tilt / (double)_owner.TiltRange ) );
                 drawingContext.DrawText( tiltText, new Point( ( _element.ActualWidth / 2.0 ) - ( tiltText.Width / 2.0 ), -tiltText.Height - 5 ) );
             }
 

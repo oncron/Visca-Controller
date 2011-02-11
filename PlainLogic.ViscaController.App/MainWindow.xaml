@@ -5,18 +5,16 @@
         Title="VISCA Controller" Height="350" Width="525" xmlns:my="clr-namespace:PlainLogic.ViscaController.App.Controls">
     
     <Window.CommandBindings>
-        <CommandBinding Command="local:VISCACommands.PanLeft" Executed="CommandBinding_Executed" />
-        <CommandBinding Command="local:VISCACommands.PanRight" Executed="CommandBinding_Executed" />
-        <CommandBinding Command="local:VISCACommands.TiltUp" Executed="CommandBinding_Executed" />
-        <CommandBinding Command="local:VISCACommands.TiltDown" Executed="CommandBinding_Executed" />
+        <CommandBinding Command="local:VISCACommands.Pan" Executed="CommandBinding_Executed" />
+        <CommandBinding Command="local:VISCACommands.Tilt" Executed="CommandBinding_Executed" />
     </Window.CommandBindings>
     
-    <Window.InputBindings>
-        <KeyBinding Command="local:VISCACommands.PanLeft" Key="Left" />
-        <KeyBinding Command="local:VISCACommands.PanRight" Key="Right" />
-        <KeyBinding Command="local:VISCACommands.TiltUp" Key="Up" />
-        <KeyBinding Command="local:VISCACommands.TiltDown" Key="Down" />
-    </Window.InputBindings>
+    <!--<Window.InputBindings>
+        <KeyBinding Command="local:VISCACommands.Pan" Key="Left" CommandParameter="-2" />
+        <KeyBinding Command="local:VISCACommands.Pan" Key="Right" CommandParameter="2" />
+        <KeyBinding Command="local:VISCACommands.Tilt" Key="Up" CommandParameter="-2" />
+        <KeyBinding Command="local:VISCACommands.Tilt" Key="Down" CommandParameter="2" />
+    </Window.InputBindings>-->
     
     <Grid>
         <Grid.RowDefinitions>
@@ -28,11 +26,13 @@
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         
-        <TextBox Name="temp">
+        <TextBox Name="temp" Grid.Column="1">
 
         </TextBox>
         
-        <my:PanTiltControl Margin="10" Grid.Column="1" Grid.Row="1" x:Name="panTiltControl" />
+        <my:CameraField x:Name="cameraField" BorderBrush="Black" BorderThickness="1" MinFOV="-100,-20" FocalPointLocation="0,0" />
+        
+        <my:PanTiltControl Margin="10" Grid.Column="1" Grid.Row="1" x:Name="panTiltControl" BorderBrush="Black" BorderThickness="1" />
     </Grid>
     
     

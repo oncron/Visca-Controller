@@ -22,7 +22,5 @@
 
         <Ellipse Grid.Row="1" Grid.Column="1" Margin="12" Fill="Red" IsHitTestVisible="False" />
 
-        <Rectangle Grid.RowSpan="3" Grid.ColumnSpan="3" ClipToBounds="True" Stroke="Black" />
-        
     </Grid>
 </UserControl>
